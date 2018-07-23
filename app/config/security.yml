@@ -7,36 +7,20 @@ security:
 
     role_hierarchy:
         ROLE_ADMIN:       ROLE_ADMIN
-        ROLE_API:         ROLE_USER
         ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
-    providers:        
+    providers:
         nasajon_provider:
-            id: Nasajon\Diretorio\AppBundle\Security\SamlProvider
+            id: nasajon_login_bundle.saml_provider 
         apikeyprovider:
-            id: Nasajon\Diretorio\AppBundle\Security\ApiKeyUserProvider
+            id: nasajon_login_bundle_provider_api_key
 
     firewalls:
         dev:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-        auth:
-            pattern:   ^/v2/api/desktop/auth
-            anonymous: ~
-            stateless: true
-            
-        sistema_auth:
-            pattern:   ^/v2/api/auth
-            anonymous: ~ 
-            logout_on_user_change: true
-            
-        auth_desk:
-            pattern:   ^/v2/api/desktop/tenants
-            anonymous: ~
-            stateless: true
-            security: false
-                   
+        
         api:
             pattern:   ^/v2/api
             stateless: true
@@ -64,9 +48,5 @@ security:
     access_control:
         - { path: ^/saml, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/fosrouting, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/v2/api/desktop/auth,  roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/v2/api/desktop/tenants,  roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/v2/api/auth,  roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/v2/api/desktop,       roles: ROLE_TENANT }
         - { path: ^/v2/api,       roles: IS_AUTHENTICATED_FULLY }
         - { path: ^/,       roles: IS_AUTHENTICATED_FULLY }

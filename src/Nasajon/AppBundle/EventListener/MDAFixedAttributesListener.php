@@ -1,6 +1,6 @@
 <?php
 
-namespace Nasajon\Diretorio\AppBundle\EventListener;
+namespace Nasajon\AppBundle\EventListener;
 
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;

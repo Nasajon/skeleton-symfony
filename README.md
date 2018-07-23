@@ -1,4 +1,4 @@
-# [Diretório](https://dir.nasajon.com.br "Diretório")
+# Projeto
 
 ### Apresentação 
 
@@ -13,13 +13,13 @@ Para iniciar o projeto, basta seguir os passos abaixo:
 Clone o projeto para a sua máquina:
 
 ``` bash
- git clone git@github.com:Nasajon/Diretorio
+ git clone git@github.com:Nasajon/Projeto
 ```
 
 Entre na pasta da aplicação
 
 ``` bash
- cd Diretorio
+ cd Projeto
 ```
 
 O projeto utiliza o composer para gestão de dependências e nós utilizamos o composer como um container docker. Para saber mais sobre como funciona, você pode ver um exemplo no nosso repositorio [Dockerfiles](https://github.com/Nasajon/Dockerfiles/tree/master/bin "Dockerfiles")

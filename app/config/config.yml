@@ -45,17 +45,6 @@ doctrine:
                 # if using pdo_sqlite as your database driver, add the path in parameters.yml
                 # e.g. database_path: %kernel.root_dir%/data/data.db3
                 # path:     %database_path%
-            syncmaster:
-                driver:   '%env(database_driver_sync_master)%'
-                host:     '%env(database_host_sync_master)%'
-                port:     '%env(database_port_sync_master)%'
-                dbname:   '%env(database_name_sync_master)%'
-                user:     '%env(database_user_sync_master)%'
-                password: '%env(database_password_sync_master)%'
-                charset:  UTF8
-                mapping_types:
-                    json: string
-                    enum: string
 
     orm:
         default_entity_manager: default
@@ -63,8 +52,6 @@ doctrine:
             default:
                 connection: default
                 auto_mapping: true
-            syncmaster:
-                connection: syncmaster
 
 sensio_framework_extra:
     view: { annotations: true }

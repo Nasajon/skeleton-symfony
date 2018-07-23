@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="msapplication-config" content="none"/>
 
-        <title>Diretório - Nasajon Sistemas</title>
+        <title>Projeto - Nasajon Sistemas</title>
 
         <link rel="icon" href="//s3-us-west-2.amazonaws.com/static.nasajon/img/favicons/favicon-multinotas.ico" />
 
@@ -18,7 +18,7 @@
         <link rel="stylesheet" href="//s3-us-west-2.amazonaws.com/static.nasajon/lib/font-awesome/4.4.0/font-awesome.min.css">
         <link rel="stylesheet" href="//s3-us-west-2.amazonaws.com/static.nasajon/lib/elusive-icons/2.0.0/elusive-icons.min.css">
         <link rel="stylesheet" href="//s3-us-west-2.amazonaws.com/static.nasajon/lib/angularjs-toaster/1.1.0/toaster.min.css" />
-        
+
         {{ "{% endverbatim %} "}}
         {{ '<base href="{{ url(\'index\', { }, true) }}">' }}                
         {{ "{% verbatim %} "}}
@@ -54,50 +54,54 @@
   </div>
   <![endif]-->
 
-    <div ng-init="appLoad.remove()" class="app-load"></div> 
-    
-    <div id="wrap">
-        <nsj-header user-service="Usuarios">
+        <div ng-init="appLoad.remove()" class="app-load"></div> 
 
-            <navbar-logo data-src="https://s3-us-west-2.amazonaws.com/static.nasajon/img/logo.png"></navbar-logo>
+        <div id="wrap">
+            <nsj-header user-service="Usuarios">
 
-            <navbar-text data-module="Diretório" data-system="Nasajon Sistemas"></navbar-text>
-        
-            <navbar-dropdown>
+                {% set tenantLogo = "//s3-us-west-2.amazonaws.com/static.nasajon/img/logo.png" %}
+                {% if (permissionFormat() == 'tenant_empresa_funcao' or permissionFormat() == 'tenant') and provisao().tenantLogo is not null  %}
+                    {% set tenantLogo = provisao().tenantLogo %}
+                {% endif %}
+                <navbar-logo data-mobile-src="{{ tenantLogo }}" data-src="{{ tenantLogo }}"></navbar-logo>
 
-                <profile>{{'{{usuario.nome}}'}}</profile>
-                
-                <header-provisoes
-                    ng-if="usuario.nome"
-                    maintext="{{'{{usuario.nome}}'}}"
-                    subtext="{{'{{usuario.email}}'}}"
-                >
-                </header-provisoes> 
+                <navbar-text data-module="Projeto" data-system="Nasajon Sistemas"></navbar-text>
 
-            </navbar-dropdown>
+                <navbar-dropdown>
 
-        </nsj-header>
+                    <profile>{{'{{usuario.nome}}'}}</profile>
 
-        <nsj-menu>
-            <nsj-menu-list>
-                <nsj-menu-item  data-icon="fa fa-building" data-label="Tenants" data-href data-link="tenants"></nsj-menu-item>                
-            </nsj-menu-list>
-        </nsj-menu>
+                    <header-provisoes
+                        ng-if="usuario.nome"
+                        maintext="{{'{{usuario.nome}}'}}"
+                        subtext="{{'{{usuario.email}}'}}"
+                        >
+                    </header-provisoes> 
+
+                </navbar-dropdown>
+
+            </nsj-header>
+
+            <nsj-menu>
+                <nsj-menu-list>
+                    <nsj-menu-item  data-icon="fa fa-building" data-label="Tenants" data-href data-link="tenants"></nsj-menu-item>                
+                </nsj-menu-list>
+            </nsj-menu>
 
 
 
-        <div class="container-fluid" ng-cloak>
+            <div class="container-fluid" ng-cloak>
 
-            <toaster-container toaster-options="{'time-out': 3000, 'close-button': true, 'animation-class': 'toast-top-center'}"></toaster-container>
+                <toaster-container toaster-options="{'time-out': 3000, 'close-button': true, 'animation-class': 'toast-top-center'}"></toaster-container>
 
-            <div class='geral clearfix' ui-view></div>
-            
-        </div>
+                <div class='geral clearfix' ui-view></div>
 
-    </div>       
+            </div>
 
-</body>
-{{ "{% endverbatim %} "}}
-{{ '<script src="{{ url(\'fos_js_routing_js\', {\'callback\': \'fos.Router.setData\'}, true) }}"></script>' }}
+        </div>       
+
+    </body>
+    {{ "{% endverbatim %} "}}
+    {{ '<script src="{{ url(\'fos_js_routing_js\', {\'callback\': \'fos.Router.setData\'}, true) }}"></script>' }}
 
 </html>

@@ -34,9 +34,9 @@ node {
         }
     
         stage('Tests') {
-            docker.image('postgres:9.3').withRun('-e "POSTGRES_DB=diretorio" -e "POSTGRES_USER=diretorio"') { c ->
+            docker.image('postgres:9.3').withRun('-e "POSTGRES_DB=projeto" -e "POSTGRES_USER=projeto"') { c ->
                 
-                docker.image('postgres:9.3').inside("--link ${c.id}:postgres -e POSTGRES_DB=diretorio -e POSTGRES_USER=diretorio -e PGPASSWORD=mysecretpassword") {
+                docker.image('postgres:9.3').inside("--link ${c.id}:postgres -e POSTGRES_DB=projeto -e POSTGRES_USER=projeto -e PGPASSWORD=mysecretpassword") {
                     sh "bash run_dump $WORKSPACE/database/dump"
                 }
                 docker.image('nasajon/php:7.1-fpm-symfony-dev').inside("--link ${c.id}:postgres --env-file $WORKSPACE/common.env -e SYMFONY_DEPRECATIONS_HELPER=disabled") {
@@ -58,9 +58,9 @@ node {
     
         stage('Docker Ship') {
             def buildName = (env.BRANCH_NAME != 'master') ? "${env.BRANCH_NAME}-${BUILD_NUMBER}" : "${BUILD_NUMBER}"
-            sh "sudo docker build --no-cache --rm -t hub.nasajon.com.br/diretoriov2:${buildName} ."
-            sh "sudo docker push hub.nasajon.com.br/diretoriov2:${buildName}"
-            sh "sudo docker rmi -f hub.nasajon.com.br/diretoriov2:${buildName}"
+            sh "sudo docker build --no-cache --rm -t hub.nasajon.com.br/projeto:${buildName} ."
+            sh "sudo docker push hub.nasajon.com.br/projeto:${buildName}"
+            sh "sudo docker rmi -f hub.nasajon.com.br/projeto:${buildName}"
         }
         
     }

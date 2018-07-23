@@ -21,7 +21,7 @@ class AppKernel extends Kernel {
             new Nasajon\LoginBundle\NasajonLoginBundle(),
             new Nasajon\MDABundle\NasajonMDABundle(),
             new Symfony\Bundle\TwigBundle\TwigBundle(),
-	    new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
+            new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('prod'), true)) {
@@ -39,6 +39,18 @@ class AppKernel extends Kernel {
 
     public function registerContainerConfiguration(LoaderInterface $loader) {
         $loader->load(__DIR__ . '/config/config_' . $this->getEnvironment() . '.yml');
+    }
+
+    public function getRootDir() {
+        return __DIR__;
+    }
+
+    public function getCacheDir() {
+        return dirname(__DIR__) . '/var/cache/' . $this->getEnvironment();
+    }
+
+    public function getLogDir() {
+        return dirname(__DIR__) . '/var/logs';
     }
 
 }

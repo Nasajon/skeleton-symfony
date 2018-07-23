@@ -1,11 +1,11 @@
 {
-    "name": "nasajon/diretorio",
+    "name": "nasajon/symfony-skeleton-project",
     "license": "MIT",
     "type": "project",
-    "description": "Diretório Nasajon Sistemas",
+    "description": "Projeto",
     "autoload": {
         "psr-4": {
-            "Nasajon\\Diretorio\\": "src/Nasajon/Diretorio", 
+            "": "src/", 
             "Nasajon\\MDABundle\\": "src/Nasajon/MDABundle"
         },
         "classmap": ["app/AppKernel.php", "app/AppCache.php"]
@@ -24,7 +24,6 @@
         "exercise/htmlpurifier-bundle": "^0.2.2",
         "nasajon/SDK": "dev-master",
         "nasajon/login-bundle": "dev-master",
-        "nasajon/diretorio-model-bundle": "dev-master",
         "sentry/sentry-symfony": "^2.0",
         "nasajon/componentes-interface-bundle": "dev-master",
         "lightsaml/sp-bundle": "^1.1",
@@ -33,10 +32,9 @@
     "require-dev": {
         "sensio/distribution-bundle": "^5.0.19",
         "nasajon/mdatransformer": "dev-master",
-        "codeception/codeception" : "^2.3.7"
+        "codeception/codeception": "^2.3.7"
     },
     "config": {
-        "bin-dir": "bin",
         "platform": {
             "php": "7.1"
         },
@@ -44,11 +42,17 @@
     },
     "minimum-stability": "stable",
     "extra": {
-        "symfony-app-dir": "app",        
-        "symfony-bin-dir": "bin",
+        "symfony-app-dir": "app",
+        "symfony-bin-dir": "app",
+        "symfony-var-dir": "var",
         "symfony-web-dir": "web",
+        "symfony-tests-dir": "tests",
+        "symfony-assets-install": "relative",
+        "incenteev-parameters": {
+            "file": "app/config/parameters.yml"
+        },
         "branch-alias": {
-            "dev-master": "2.3-dev"
+            "dev-master": "3.3-dev"
         }
     },
     "repositories": [
@@ -58,19 +62,15 @@
         },
         {
             "type": "git",
-            "url": "https://github.com/Nasajon/SDK"
+            "url": "git@github.com:Nasajon/SDK"
         },
         {
             "type": "git",
-            "url": "git@github.com:Nasajon/DiretorioModelBundle"
+            "url": "git@github.com:Nasajon/ComponentesInterfaceBundle"
         },
         {
             "type": "git",
-            "url": "https://github.com/Nasajon/ComponentesInterfaceBundle"
-        },
-        {
-            "type": "git",
-            "url": "https://github.com/Nasajon/MdaPhpTransformer"
+            "url": "git@github.com:Nasajon/MdaPhpTransformer"
         }
     ]
 }

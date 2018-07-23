@@ -19,8 +19,8 @@ services:
        volumes:
            - $PWD/database/dump:/docker-entrypoint-initdb.d/
        environment:
-           - "POSTGRES_DB=diretorio"
-           - "POSTGRES_USER=diretorio"
+           - "POSTGRES_DB=projeto"
+           - "POSTGRES_USER=projeto"
            - "POSTGRES_PASSWORD=mysecretpassword"  
       
     transformer:

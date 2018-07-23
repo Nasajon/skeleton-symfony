@@ -76,17 +76,6 @@ class Functional extends \Codeception\Module {
         $container->set('nasajon_sdk.diretorio', $diretorio);
     }
 
-    public function amLoggedInAsSistema($sistema) {
-
-        $secret = $this->getModule('Symfony')->grabService('kernel')->getContainer()->getParameter('kernel.secret');
-
-        $token = \JWT::encode([
-                    'tipo' => 'sistema',
-                    'sistema' => $sistema
-                        ], $secret, 'HS256');
-        $this->getModule('REST')->haveHttpHeader('apikey', $token);
-    }
-
     public function sendRaw($method, $uri, $parameters, $files, $server, $content) {
 
         return json_decode($this->getModule('Symfony')->_request($method, $uri, $parameters, $files, $server, $content), true);

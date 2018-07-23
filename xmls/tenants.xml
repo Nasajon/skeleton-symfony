@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <nsjusecase xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../vendor/nasajon/mdatransformer/schemas/nsjusecase.xsd" name="tenants" label="tenants">
     <entity schema="diretorio" table="tenants">
-        <fieldmodel name="tenant_id" datatype="integer" isid="true" column="id"/>
+        <fieldmodel name="tenant_id" datatype="integer" isid="true" column="tenant"/>
         <fieldmodel name="nome" datatype="string" column="nome"/>
         <fieldmodel name="codigo" datatype="string" column="codigo"/>
         <fieldmodel name="logo" datatype="string" column="logo" />
     </entity>
-    <constructors>
-        <constructoritem required="false">cliente</constructoritem>
-    </constructors>
     <viewbrowser label="Tenants" layout="list" paginate="true" target="builtin">
         <fieldsbrowser>
             <fieldbrowser entitylink="tenant_id" isid="true" visible="false"/>

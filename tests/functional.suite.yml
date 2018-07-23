@@ -23,8 +23,8 @@ modules:
             headers:
                 apiKey: abc
         - Db:
-            dsn: 'pgsql:host=postgres;dbname=diretorio'
-            user: 'diretorio'
+            dsn: 'pgsql:host=postgres;dbname=projeto'
+            user: 'projeto'
             password: 'mysecretpassword'
             populate: true # load dump before all tests
             dump: 'tests/_data/dump.sql'

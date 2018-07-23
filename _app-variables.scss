@@ -1,0 +1,40 @@
+/*Cores customizáveis do sistema*/
+
+/*
+- Background do menu geral do sistema
+- Títulos de itens de listas
+- Background de botões de ação principal da página/modal (btn-primary)
+*/
+$custom-color-1: #34727d;
+
+/*
+- Títulos de páginas
+*/
+$custom-color-2: #34727d;
+
+/*
+- Cor para itens que necessitam de atenção. Exemplo: botões de editar / adicionar itens (btn-warning)
+*/
+$custom-color-3: #E74617;
+
+/*
+- Cor de links gerais do sistema
+*/
+$custom-color-4: #34727d;
+
+
+$width: 270px;
+
+/* ------------------------------- CUSTOMIZAÇÕES DO MENU ---------------------------- */
+/* CORES USADAS CASO A CLASS bg-default SEJA USADA NO BODY */
+
+$bg-menu: #fff; //cor de fundo do menu
+$menu-item-color: #4b4b4b; //cor dos links
+$menu-item-color-hover: #777; //cor dos links no hover
+
+
+$menu-item-color-active: $custom-color-1; //cor dos links ativos
+$menu-item-background-active: none; //cor de fundo dos links ativos
+
+$color-text-bg: #333; //cor dos textos que estão sob o fundo principal (se o menu for branco, trocar para cor escura, se o menu for colorido, trocar para branco)
+$color-text-invert: #fff; //(colocar o inverso da cor acima)

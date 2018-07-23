@@ -1,0 +1,30 @@
+index:
+    path: /
+    defaults:
+        _controller:  FrameworkBundle:Template:template
+        template: '@NasajonMDABundle/Resources/js/index.html'
+
+nasajon_login_bundle:
+    resource: "@NasajonLoginBundle/Resources/config/routing.yml"
+
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+    prefix: /fosrouting
+
+app:
+   resource: "routing/app.yml"
+
+api:
+   resource: "routing/api.yml"
+   type: rest
+   prefix: /v2/api
+   type: rest
+    
+index_html5mode:
+    path: /{html5mode}
+    defaults:
+        html5mode: 'home'
+        _controller:  FrameworkBundle:Template:template
+        template: '@NasajonMDABundle/Resources/js/index.html'
+    requirements:
+        html5mode: .+

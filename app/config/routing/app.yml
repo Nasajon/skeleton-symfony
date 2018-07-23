@@ -1,0 +1,7 @@
+  
+nasajon_private:
+   resource: "private.yml"
+   type: rest
+   prefix:   /private
+   options:
+       expose: true

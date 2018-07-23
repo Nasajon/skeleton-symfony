@@ -1,0 +1,15 @@
+/*THEME BREAKPOINTS*/
+$max-xs: 767px;
+$min-sm: $max-xs+1px;
+$max-sm: 991px;
+$min-md: $max-sm+1px;
+$max-md: 1200px;
+$min-lg: $max-md+1px;
+
+// @import "./vendor/nasajon/componentes-interface-bundle/Nasajon/ComponentesInterfaceBundle/Resources/public/angular-modules/modules/angularModules.scss";
+@import "../../app-variables";
+
+/*@import 'templates/global';
+@import 'templates/nfarquivo';
+@import 'templates/aside';
+*/

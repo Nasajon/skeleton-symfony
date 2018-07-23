@@ -1,0 +1,132 @@
+imports:
+    - { resource: security.yml }
+    - { resource: services.yml }
+
+framework:
+    #esi:             ~
+    translator:      { fallback: 'en' }
+    secret:          '%env(secret)%'
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+        strict_requirements: '%kernel.debug%'
+    form:            ~
+    csrf_protection: true
+    validation:      { enable_annotations: true }
+        #assets_version: SomeVersionScheme
+    templating:		
+        engines: ['twig']
+    default_locale:  "en"
+    session:         
+        handler_id: ~
+    fragments:       ~
+    
+# Twig Configuration		
+twig:		
+    debug:            '%kernel.debug%'		
+    strict_variables: '%kernel.debug%'
+    exception_controller: 'FOS\RestBundle\Controller\ExceptionController::showAction'
+    
+# Doctrine Configuration
+doctrine:
+    dbal:
+        default_connection: default
+        connections:
+            default:
+                driver:   '%env(database_driver)%'
+                host:     '%env(database_host)%'
+                port:     '%env(database_port)%'
+                dbname:   '%env(database_name)%'
+                user:     '%env(database_user)%'
+                password: '%env(database_password)%'
+                charset:  UTF8
+                mapping_types:
+                    json: string
+                    enum: string
+                # if using pdo_sqlite as your database driver, add the path in parameters.yml
+                # e.g. database_path: %kernel.root_dir%/data/data.db3
+                # path:     %database_path%
+            syncmaster:
+                driver:   '%env(database_driver_sync_master)%'
+                host:     '%env(database_host_sync_master)%'
+                port:     '%env(database_port_sync_master)%'
+                dbname:   '%env(database_name_sync_master)%'
+                user:     '%env(database_user_sync_master)%'
+                password: '%env(database_password_sync_master)%'
+                charset:  UTF8
+                mapping_types:
+                    json: string
+                    enum: string
+
+    orm:
+        default_entity_manager: default
+        entity_managers:
+            default:
+                connection: default
+                auto_mapping: true
+            syncmaster:
+                connection: syncmaster
+
+sensio_framework_extra:
+    view: { annotations: true }
+
+fos_rest:
+    
+    disable_csrf_role: ROLE_API
+    param_fetcher_listener: true
+    routing_loader:
+        default_format: ~
+        include_format: false
+    view:
+        mime_types:
+            json: ['application/json', 'application/json;version=1.0', 'application/json;version=1.1']
+        view_response_listener: 
+            force: true
+        formats:            
+            json: true
+            xml:  true
+            html: true
+        templating_formats:
+            html: true
+    format_listener:
+        rules:
+            - { path: ^/api, priorities: [ json ], fallback_format: json, prefer_extension: true }
+            - { path: ^/, priorities: [ html ], fallback_format: html, prefer_extension: true }
+    body_converter:
+        enabled: true
+        validate: true
+    exception:
+        enabled: true        
+        codes:
+            'Symfony\Component\Routing\Exception\ResourceNotFoundException': 404
+            'Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException': 405
+            'Doctrine\ORM\OptimisticLockException': HTTP_CONFLICT
+        messages:
+            'Symfony\Component\Routing\Exception\ResourceNotFoundException': true
+    allowed_methods_listener: true    
+
+
+nasajon_login:
+    permission_format: ~
+    permission_type: ~    
+    
+light_saml_symfony_bridge:
+    own:
+        entity_id: "%env(entity_id)%"
+        credentials:
+            -
+                certificate: "%kernel.project_dir%/%env(sp_certificate_crt)%"
+                key:         "%kernel.project_dir%/%env(sp_certificate_pem)%"
+                password:    ~
+    party:
+        idp:
+            files:
+                - "%kernel.project_dir%/%env(sp_metadata)%"
+    store:
+        id_state: id_store  # name of id store service created in step 6
+
+doctrine_migrations:
+    dir_name: "%kernel.project_dir%/database"
+    namespace: DoctrineMigrations
+    table_name: migration_versions
+    name: Application Migrations
+    organize_migrations: false

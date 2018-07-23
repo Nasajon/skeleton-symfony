@@ -1,0 +1,32 @@
+imports:
+    - { resource: config.yml }
+
+# In production environment you should know that the parameters for URL generation
+# always pass the requirements. Otherwise it would break your link (or even site with
+# strict_requirements = true). So we can disable the requirements check completely for
+# enhanced performance with strict_requirements = null.
+framework:
+    router:
+        strict_requirements: null
+    #validation:
+    #    cache: apc
+
+#doctrine:
+#    orm:
+#        metadata_cache_driver: apc
+#        result_cache_driver: apc
+#        query_cache_driver: apc
+
+monolog:
+    handlers:
+        main:
+            type:         fingers_crossed
+            action_level: error
+            handler:      nested
+        nested:
+            type:  stream
+            path:  %kernel.logs_dir%/%kernel.environment%.log
+            level: debug
+
+sentry:
+    dsn: "https://3017bc8d9a1b477493ed2c9c90f5d45a:ef4cf8e537364a539b73255da98d9ae1@sentry.nasajon.com.br/8"

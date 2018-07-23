@@ -1,0 +1,39 @@
+version: '2'
+
+services:
+    app:
+        image: nasajon/php:7.1-fpm-symfony-dev
+        restart: always
+        ports:
+            - "80:80"
+        volumes:
+            - $PWD:/var/www/html        
+        env_file:
+            - common.env
+
+    postgres:
+       image: postgres:9.6
+       ports:
+         - "5432:5432"
+       restart: always
+       volumes:
+           - $PWD/database/dump:/docker-entrypoint-initdb.d/
+       environment:
+           - "POSTGRES_DB=diretorio"
+           - "POSTGRES_USER=diretorio"
+           - "POSTGRES_PASSWORD=mysecretpassword"  
+      
+    transformer:
+        image: nasajon/php-node
+        volumes:
+              - $PWD:/var/www/html
+        working_dir: /var/www/html
+        entrypoint: php vendor/nasajon/mdatransformer/bin/convert nasajon:mda:builder --nocache -vvv --cleardir
+        
+    memcache:
+      image: memcached
+      restart: always
+      hostname: memcache
+      mem_limit: 268435456
+      expose:
+        - "11211"      

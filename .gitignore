@@ -13,3 +13,5 @@ app/config/parameters.yml
 /node_modules/*
 /src/Nasajon/MDABundle
 /common.env
+/var/cache/*
+/var/logs/*

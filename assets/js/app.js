@@ -7,19 +7,21 @@ angular.module('main',
             'ngSanitize',
             'mdaUiSelect',
             'ngMessages',
+            'objectList',
             'ngFileUpload',
             'angular-file-input',
-            'angularModules',
             'angularMoment',
             'angular.filter',
             'toaster',
             'convertToNumber',
+            'ntt.TreeDnD',
             'filters',
-            'ui.mask', 
+            'ui.mask',
             'checklist-model',
             'ui.mask',
             'ngCpfCnpj',
-            'dateInput'
+            'dateInput',
+            'nasajon-ui'
 
         ])
         .config(['$locationProvider', '$urlRouterProvider', function ($locationProvider, $urlRouterProvider) {

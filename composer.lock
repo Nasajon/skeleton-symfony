@@ -2270,47 +2270,6 @@
             "time": "2017-06-19T01:22:40+00:00"
         },
         {
-            "name": "nasajon/componentes-interface-bundle",
-            "version": "dev-master",
-            "target-dir": "Nasajon/ComponentesInterfaceBundle",
-            "source": {
-                "type": "git",
-                "url": "git@github.com:Nasajon/ComponentesInterfaceBundle",
-                "reference": "8a4685e4194fb01c8282cc362a2f5e71ac6f6fb1"
-            },
-            "require": {
-                "php": ">=5.5.1"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Nasajon\\ComponentesInterfaceBundle": ""
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Rodrigo Dirk",
-                    "email": "rodrigodirk@nasajon.com.br"
-                }
-            ],
-            "description": "Bundle do Symfony para padronização dos componentes de interface dos aplicativos web da Nasajon.",
-            "homepage": "http://nasajon.github.com",
-            "keywords": [
-                "entity",
-                "model",
-                "nasajon"
-            ],
-            "time": "2018-06-25T19:28:38+00:00"
-        },
-        {
             "name": "nasajon/login-bundle",
             "version": "dev-master",
             "target-dir": "Nasajon/LoginBundle",
@@ -4572,11 +4531,11 @@
         },
         {
             "name": "nasajon/mdatransformer",
-            "version": "dev-master",
+            "version": "v2.3.1",
             "source": {
                 "type": "git",
-                "url": "git@github.com:Nasajon/MdaPhpTransformer",
-                "reference": "0bd209aabaa63e3a776798fc4a4dd53402f979f4"
+                "url": "https://github.com/Nasajon/MdaPhpTransformer",
+                "reference": "e301ddacfefa1f32b93f101cf01ff3a91472f854"
             },
             "require": {
                 "doctrine/orm": ">2.5",
@@ -4608,7 +4567,7 @@
                     "email": "rodrigodirk@nasajon.com.br"
                 }
             ],
-            "time": "2018-07-23T18:20:37+00:00"
+            "time": "2018-12-19T11:40:00+00:00"
         },
         {
             "name": "phar-io/manifest",

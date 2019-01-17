@@ -1,9 +1,3 @@
-index:
-    path: /
-    defaults:
-        _controller:  FrameworkBundle:Template:template
-        template: '@NasajonMDABundle/Resources/js/index.html'
-
 nasajon_login_bundle:
     resource: "@NasajonLoginBundle/Resources/config/routing.yml"
 
@@ -20,11 +14,17 @@ api:
    prefix: /v2/api
    type: rest
     
-index_html5mode:
-    path: /{html5mode}
+  
+index:
+    type: rest
+    resource: "Nasajon\\AppBundle\\Controller\\IndexController"
     defaults:
         html5mode: 'home'
-        _controller:  FrameworkBundle:Template:template
-        template: '@NasajonMDABundle/Resources/js/index.html'
     requirements:
         html5mode: .+
+    
+index_trailing_slash:
+    path: /{tenant}/
+    defaults:
+        _controller:  FrameworkBundle:Template:template
+        template: '@NasajonMDABundle/Resources/js/index.html'

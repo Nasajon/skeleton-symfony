@@ -1,15 +1,19 @@
-/*THEME BREAKPOINTS*/
-$max-xs: 767px;
-$min-sm: $max-xs+1px;
-$max-sm: 991px;
-$min-md: $max-sm+1px;
-$max-md: 1200px;
-$min-lg: $max-md+1px;
-
-// @import "./vendor/nasajon/componentes-interface-bundle/Nasajon/ComponentesInterfaceBundle/Resources/public/angular-modules/modules/angularModules.scss";
-@import "../../app-variables";
-
-/*@import 'templates/global';
-@import 'templates/nfarquivo';
-@import 'templates/aside';
+/*
+* APPLICATION VARIABLES
 */
+$custom-color-1: #34727d;
+$custom-color-2: #27616b;
+$custom-color-3: #E74617;
+$custom-color-4: #2d7cd0;
+
+/*
+* NASAJON UI 
+*/
+@import '../../node_modules/nasajon-ui/src/nasajon-ui';
+@import '../../node_modules/nasajon-ui/src/theme';
+
+
+/*
+* Para seu próprio css descomente a linha de import abaixo e crie o arquivo referente com o nome do seu projeto
+*/
+/*@import 'templates/projetonome';*/

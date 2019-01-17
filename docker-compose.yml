@@ -28,7 +28,7 @@ services:
         volumes:
               - $PWD:/var/www/html
         working_dir: /var/www/html
-        entrypoint: php vendor/nasajon/mdatransformer/bin/convert nasajon:mda:builder --nocache -vvv --cleardir
+        entrypoint: php vendor/nasajon/mdatransformer/bin/transformer nasajon:mda:builder --nocache -vvv --cleardir
         
     memcache:
       image: memcached

@@ -13,28 +13,33 @@
             <fieldbrowser alias="Código" entitylink="codigo" visible="true" cansearch="true" indefaultorder="true" />
         </fieldsbrowser>
     </viewbrowser>
-    <viewedit label="Tenant" mode="view">
-        <layout>
-            <headerform>
-                <row>
-                    <cell name="codigo" controltype="textedit" label="Código" colspan="8" entitylink="codigo">
-                        <validates>
-                            <validate type="vnull" displaytext="O campo codigo não pode ser vazio."/>
-                        </validates>
-                    </cell>
-                </row>
-                <row>
-                    <cell name="nome" controltype="textedit" label="Nome" colspan="6" entitylink="nome">
-                        <validates>
-                            <validate type="vnull" displaytext="O campo nome não pode ser vazio."/>
-                        </validates>
-                    </cell>
-                    <cell name="logo" controltype="textedit" label="Logo" colspan="6" entitylink="logo" />
-                </row>
-            </headerform>            
-        </layout>
-    </viewedit>
+    <forms>
+      <form name="default" label="Tenants">
+          <layout>
+              <headerform>
+                  <row>
+                      <cell name="codigo" controltype="textedit" label="Código" colspan="8" entitylink="codigo">
+                          <validates>
+                              <validate type="vnull" displaytext="O campo codigo não pode ser vazio."/>
+                          </validates>
+                      </cell>
+                  </row>
+                  <row>
+                      <cell name="nome" controltype="textedit" label="Nome" colspan="6" entitylink="nome">
+                          <validates>
+                              <validate type="vnull" displaytext="O campo nome não pode ser vazio."/>
+                          </validates>
+                      </cell>
+                      <cell name="logo" controltype="textedit" label="Logo" colspan="6" entitylink="logo" />
+                  </row>
+              </headerform>            
+          </layout>
+      </form>
+    </forms>
     <actions>
+        <action>
+          <name>retrieve</name>
+        </action>
         <action>
             <name>Insert</name>
             <api>

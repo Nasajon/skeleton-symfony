@@ -4,19 +4,16 @@ transformer:
     plugins:
         - angular1
         - symfony
-
 compiler:
     namespace:
         dist: "web"
         MDA: "src/Nasajon/MDABundle/Resources/js"
         src: "assets/view/"
+    sourcePath:
+        - "@MDA"
+        - "@src"
     targetPath: "src/Nasajon/MDABundle/Resources/js/"
-    view:
-        "@src/index.html.twig" : "index.html"
-        "@MDA/Tenants/index.html.twig" : "Tenants/index.html"
-        "@MDA/Tenants/form.html.twig" : "Tenants/form.html"
-        "@MDA/Tenants/show.html.twig" : "Tenants/show.html"        
-
+    
 webpack:
     files:
         - "assets/"

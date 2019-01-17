@@ -15,12 +15,11 @@
 
         <link rel='stylesheet' href='//fonts.googleapis.com/css?family=Lato:300,400,700'>
         <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto+Condensed">
-        <link rel="stylesheet" href="//s3-us-west-2.amazonaws.com/static.nasajon/lib/font-awesome/4.4.0/font-awesome.min.css">
         <link rel="stylesheet" href="//s3-us-west-2.amazonaws.com/static.nasajon/lib/elusive-icons/2.0.0/elusive-icons.min.css">
         <link rel="stylesheet" href="//s3-us-west-2.amazonaws.com/static.nasajon/lib/angularjs-toaster/1.1.0/toaster.min.css" />
 
         {{ "{% endverbatim %} "}}
-        {{ '<base href="{{ url(\'index\', { }, true) }}">' }}                
+        {{ '<base href="{{ url(\'index\', { tenant : app.request.get(\'tenant\')  }, true) }}">' }}                
         {{ "{% verbatim %} "}}
 
         <!--[if lt IE 9]>
@@ -54,15 +53,20 @@
   </div>
   <![endif]-->
 
-        <div ng-init="appLoad.remove()" class="app-load"></div> 
+        <div ng-init="appLoad.remove()" class="nsj-app-load">
+            <div class="load-area">
+                <div class="app-load-icon"></div>
+            </div>
+        </div>
+
 
         <div id="wrap">
             <nsj-header user-service="Usuarios">
 
                 {% set tenantLogo = "//s3-us-west-2.amazonaws.com/static.nasajon/img/logo.png" %}
-                {% if (permissionFormat() == 'tenant_empresa_funcao' or permissionFormat() == 'tenant') and provisao().tenantLogo is not null  %}
+                {#{% if (permissionFormat() == 'tenant_empresa_funcao' or permissionFormat() == 'tenant') and provisao().tenantLogo is not null  %}
                     {% set tenantLogo = provisao().tenantLogo %}
-                {% endif %}
+                {% endif %}#}
                 <navbar-logo data-mobile-src="{{ tenantLogo }}" data-src="{{ tenantLogo }}"></navbar-logo>
 
                 <navbar-text data-module="Projeto" data-system="Nasajon Sistemas"></navbar-text>
@@ -90,7 +94,7 @@
 
 
 
-            <div class="container-fluid" ng-cloak>
+            <div class="container-fluid main-container" ng-cloak>
 
                 <toaster-container toaster-options="{'time-out': 3000, 'close-button': true, 'animation-class': 'toast-top-center'}"></toaster-container>
 
@@ -103,5 +107,5 @@
     </body>
     {{ "{% endverbatim %} "}}
     {{ '<script src="{{ url(\'fos_js_routing_js\', {\'callback\': \'fos.Router.setData\'}, true) }}"></script>' }}
-
+    {{ '<script src="{{ url(\'globals\', { tenant : app.request.get(\'tenant\') }, true) }}"></script>' }}
 </html>

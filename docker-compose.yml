@@ -17,11 +17,11 @@ services:
          - "5432:5432"
        restart: always
        volumes:
-           - $PWD/database/dump:/docker-entrypoint-initdb.d/
+           - $PWD/vendor/nasajon/bancosweb/dump:/docker-entrypoint-initdb.d/
        environment:
-           - "POSTGRES_DB=projeto"
-           - "POSTGRES_USER=projeto"
-           - "POSTGRES_PASSWORD=mysecretpassword"  
+           - "POSTGRES_DB=integratto2"
+           - "POSTGRES_USER=postgres"
+           - "POSTGRES_PASSWORD=postgres" 
       
     transformer:
         image: nasajon/php-node

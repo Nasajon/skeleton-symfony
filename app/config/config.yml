@@ -112,7 +112,7 @@ light_saml_symfony_bridge:
         id_state: id_store  # name of id store service created in step 6
 
 doctrine_migrations:
-    dir_name: "%kernel.project_dir%/database"
+    dir_name: "%kernel.project_dir%/vendor/nasajon/bancosweb/database"
     namespace: DoctrineMigrations
     table_name: migration_versions
     name: Application Migrations

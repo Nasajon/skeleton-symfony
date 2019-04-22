@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "39dec17082b6e9a854e0402eabc63ffd",
+    "content-hash": "937d20271426895004931cd7beb8a992",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -939,12 +939,12 @@
             "version": "v2.6.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/doctrine/doctrine2.git",
+                "url": "https://github.com/doctrine/orm.git",
                 "reference": "d2b4dd71d2a276edd65d0c170375b445f8a4a4a8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/d2b4dd71d2a276edd65d0c170375b445f8a4a4a8",
+                "url": "https://api.github.com/repos/doctrine/orm/zipball/d2b4dd71d2a276edd65d0c170375b445f8a4a4a8",
                 "reference": "d2b4dd71d2a276edd65d0c170375b445f8a4a4a8",
                 "shasum": ""
             },
@@ -4531,11 +4531,11 @@
         },
         {
             "name": "nasajon/bancosweb",
-            "version": "x.22200-dev",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Nasajon/BancosWeb",
-                "reference": "65c04ffdeb2e07e88b4ab4afaac2b4dd1dfba40e"
+                "reference": "9aa25c49c01013470e332c1d515dd81cd5cd54d2"
             },
             "require": {
                 "doctrine/migrations": "^1.6"
@@ -4547,15 +4547,15 @@
                     "email": "rodrigodirk@nasajon.com.br"
                 }
             ],
-            "time": "2019-01-09T14:28:12+00:00"
+            "time": "2019-04-21T17:44:54+00:00"
         },
         {
             "name": "nasajon/mdatransformer",
             "version": "v2.3.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Nasajon/MdaPhpTransformer",
-                "reference": "e301ddacfefa1f32b93f101cf01ff3a91472f854"
+                "url": "git@github.com:Nasajon/MdaPhpTransformer",
+                "reference": "01b6111923c37af8267de3b8454a85368718fcb2"
             },
             "require": {
                 "doctrine/orm": ">2.5",
@@ -4587,7 +4587,7 @@
                     "email": "rodrigodirk@nasajon.com.br"
                 }
             ],
-            "time": "2018-12-19T11:40:00+00:00"
+            "time": "2019-01-03T14:03:51+00:00"
         },
         {
             "name": "phar-io/manifest",
@@ -5289,6 +5289,7 @@
                 "mock",
                 "xunit"
             ],
+            "abandoned": true,
             "time": "2018-05-29T13:54:20+00:00"
         },
         {
@@ -6153,8 +6154,6 @@
     "stability-flags": {
         "nasajon/sdk": 20,
         "nasajon/login-bundle": 20,
-        "nasajon/componentes-interface-bundle": 20,
-        "nasajon/mdatransformer": 20,
         "nasajon/bancosweb": 20
     },
     "prefer-stable": false,

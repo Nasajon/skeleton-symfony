@@ -14,6 +14,11 @@ services:
         # if you need to do this, you can override this setting on individual services
         public: false
 
+    # makes classes in src/AppBundle available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    Nasajon\AppBundle\:
+        resource: '../../src/Nasajon/AppBundle/*'
+
     Nasajon\AppBundle\EventListener\MDAFixedAttributesListener:
         class : Nasajon\AppBundle\EventListener\MDAFixedAttributesListener
         tags:
@@ -21,6 +26,7 @@ services:
         arguments :
             - "@security.token_storage"
             - "@nasajon_mda.fixed_attributes"
+            - '@Nasajon\AppBundle\Repository\Ns\TenantsRepository'
 
     session.memcached:
         class: Memcached

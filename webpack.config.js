@@ -71,7 +71,7 @@ module.exports = {
           './node_modules/cpf_cnpj/build/cnpj.js',
           './node_modules/checklist-model/checklist-model.js',
           './node_modules/nasajon-ui/src/nasajon-ui.ts',
-            './node_modules/@fortawesome/fontawesome-free/js/all.js',
+          './node_modules/@fortawesome/fontawesome-free/js/all.js',
         ],
         css: [
             './assets/sass/style.scss',
@@ -95,14 +95,33 @@ module.exports = {
         ],
         mda: [
             './assets/js/mda-config.js',
-            './src/Nasajon/MDABundle/Resources/js/Tenants/config.js',
-            './src/Nasajon/MDABundle/Resources/js/Tenants/default.form.js',
-            './src/Nasajon/MDABundle/Resources/js/Tenants/default.form.show.js',
-            './src/Nasajon/MDABundle/Resources/js/Tenants/new.js',
-            './src/Nasajon/MDABundle/Resources/js/Tenants/show.js',
-            './src/Nasajon/MDABundle/Resources/js/Tenants/index.js',
-            './src/Nasajon/MDABundle/Resources/js/Tenants/edit.js',
-            './src/Nasajon/MDABundle/Resources/js/Tenants/factory.js'
+
+            './src/Nasajon/MDABundle/Resources/js/Estados/config.js',
+            './src/Nasajon/MDABundle/Resources/js/Estados/default.form.js',
+            './src/Nasajon/MDABundle/Resources/js/Estados/default.form.show.js',
+            './src/Nasajon/MDABundle/Resources/js/Estados/new.js',
+            './src/Nasajon/MDABundle/Resources/js/Estados/show.js',
+            './src/Nasajon/MDABundle/Resources/js/Estados/index.js',
+            './src/Nasajon/MDABundle/Resources/js/Estados/edit.js',
+            './src/Nasajon/MDABundle/Resources/js/Estados/factory.js',
+
+            './src/Nasajon/MDABundle/Resources/js/Cidades/config.js',
+            './src/Nasajon/MDABundle/Resources/js/Cidades/default.form.js',
+            './src/Nasajon/MDABundle/Resources/js/Cidades/default.form.show.js',
+            './src/Nasajon/MDABundle/Resources/js/Cidades/new.js',
+            './src/Nasajon/MDABundle/Resources/js/Cidades/show.js',
+            './src/Nasajon/MDABundle/Resources/js/Cidades/index.js',
+            './src/Nasajon/MDABundle/Resources/js/Cidades/edit.js',
+            './src/Nasajon/MDABundle/Resources/js/Cidades/factory.js',
+
+            './src/Nasajon/MDABundle/Resources/js/Pessoas/config.js',
+            './src/Nasajon/MDABundle/Resources/js/Pessoas/default.form.js',
+            './src/Nasajon/MDABundle/Resources/js/Pessoas/default.form.show.js',
+            './src/Nasajon/MDABundle/Resources/js/Pessoas/new.js',
+            './src/Nasajon/MDABundle/Resources/js/Pessoas/show.js',
+            './src/Nasajon/MDABundle/Resources/js/Pessoas/index.js',
+            './src/Nasajon/MDABundle/Resources/js/Pessoas/edit.js',
+            './src/Nasajon/MDABundle/Resources/js/Pessoas/factory.js'
 
         ],
         app: [

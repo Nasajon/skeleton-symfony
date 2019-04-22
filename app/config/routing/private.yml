@@ -1,4 +1,14 @@
-tenants:
+estados:
     type: rest
-    resource: "Nasajon\\MDABundle\\Controller\\TenantsController"
-    name_prefix:   "tenants_"
+    resource: "Nasajon\\MDABundle\\Controller\\EstadosController"
+    name_prefix:   "estados_"
+
+cidades:
+    type: rest
+    resource: "Nasajon\\MDABundle\\Controller\\CidadesController"
+    name_prefix:   "cidades_"
+
+pessoas:
+    type: rest
+    resource: "Nasajon\\MDABundle\\Controller\\PessoasController"
+    name_prefix:   "pessoas_"

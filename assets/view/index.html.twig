@@ -19,7 +19,7 @@
         <link rel="stylesheet" href="//s3-us-west-2.amazonaws.com/static.nasajon/lib/angularjs-toaster/1.1.0/toaster.min.css" />
 
         {{ "{% endverbatim %} "}}
-        {{ '<base href="{{ url(\'index\', { tenant : app.request.get(\'tenant\')  }, true) }}">' }}                
+        {{ '<base href="{{ url(\'index\', { tenant : app.request.get(\'tenant\')  }, true) }}/">' }}                
         {{ "{% verbatim %} "}}
 
         <!--[if lt IE 9]>
@@ -87,8 +87,10 @@
             </nsj-header>
 
             <nsj-menu>
-                <nsj-menu-list>
-                    <nsj-menu-item  data-icon="fa fa-building" data-label="Tenants" data-href data-link="tenants"></nsj-menu-item>                
+                <nsj-menu-list>                  
+                    <nsj-menu-item  data-icon="fa fa-building" data-label="Estados" data-href data-link="estados"></nsj-menu-item>                
+                    <nsj-menu-item  data-icon="fa fa-building" data-label="Cidades" data-href data-link="cidades"></nsj-menu-item>                
+                    <nsj-menu-item  data-icon="fa fa-building" data-label="Pessoas" data-href data-link="pessoas"></nsj-menu-item>                
                 </nsj-menu-list>
             </nsj-menu>
 

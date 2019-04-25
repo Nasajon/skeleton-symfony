@@ -1,6 +1,7 @@
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var path = require('path');
+const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const devMode = process.env.NODE_ENV !== 'production'
@@ -14,8 +15,7 @@ function getPlugins() {
             }
         }),
         new MiniCssExtractPlugin({
-            filename: devMode ? '[name].css' : '[name].[hash].css',
-            chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
+            filename: devMode ? '[name].css' : '[name].[hash].css',            
         }),
         new HtmlWebpackPlugin({
             filename: path.resolve(__dirname, 'src/Nasajon/MDABundle/Resources/js/index.html'),
@@ -23,6 +23,15 @@ function getPlugins() {
         }),
         new webpack.SourceMapDevToolPlugin({
             filename: "sourcemap/[file].map"
+        }),
+        new LoaderOptionsPlugin({
+            debug: true,
+            options: {
+                tslint: {
+                    configuration: require('./tslint.json'),
+                    typeCheck: true
+                }
+            }
         })
     ];
 
@@ -36,16 +45,18 @@ function getEnvironment () {
 
 
 module.exports = {
-    optimization: {
-        nodeEnv: process.env.NODE_ENV,
-        minimizer: [
-          new TerserPlugin({})
-        ]
-      },
-      mode: getEnvironment(),
-      resolve: {
+
+    mode: getEnvironment(),
+
+    resolve: {
         extensions: ['.ts', '.js']
     },
+
+    optimization: {
+        nodeEnv: process.env.NODE_ENV,
+        minimizer: devMode ? [ new TerserPlugin({}) ] : [] 
+    },
+
     entry: {
         vendor: [
           './node_modules/angular/angular.js',
@@ -134,73 +145,61 @@ module.exports = {
         publicPath: '/assets/'
     },
 plugins: getPlugins(),
-    module: {
-        rules: [
-            {
-           test: /\.(ts|tsx)?$/,
-           use: [
-               {
-                   loader: 'ts-loader'
-               }
-           ]
-           },
-            {
-                test: /\.(sa|sc|c)ss$/,
-                use: [
-                    devMode ? 'style-loader' : MiniCssExtractPlugin.loader, {
-                        loader: 'css-loader',
-                        options: {
-                            sourceMap: true
-                        }
-                    },
-                    {
-                        loader: 'resolve-url-loader',
-                        options: {
-                            debug: true,
-                            root: __dirname
-                        }
-                    },
-                    {
-                        loader: 'sass-loader',
-                        options: {
-                            outputStyle: 'compressed',
-                            sourceMap: true
-                        }
-                    }
-                ]
-            },
-            {
-                test: /\.json$/,
-                loader: 'json-loader'
-            },
-            {
-                test: /\.(jpg|png|gif)$/,
-                use: 'file-loader?outputPath=img/',
-            },
 
-            {
-                test: /\.(svg|woff|woff2|eot|ttf)$/,
-                use: 'file-loader?outputPath=fonts/',
-            },
-            {
-                test: /\.ts$/,
-                exclude: [/node_modules/],
-                use: [
-                    'awesome-typescript-loader'
-                ]
-            },
-            {
-                test: /\.ts$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: 'tslint-loader',
+module: {
+    rules: [{
+            test: /\.ts$/,
+            use: [
+                'awesome-typescript-loader'
+            ]
+        },
+        {
+            test: /\.(sa|sc|c)ss$/,
+            use: [
+                MiniCssExtractPlugin.loader, {
+                    loader: 'css-loader',
                     options: {
-                        emitErrors: true
+                        sourceMap: true
                     }
                 },
-                enforce: 'pre'
-            }
-        ]
-    }
+                {
+                    loader: "resolve-url-loader",
+                    options: {
+                        keepQuery: true,
+                        sourceMap: true,
+                        sourceMapContents: false
+                    }
+                },
+                {
+                    loader: 'sass-loader',
+                    options: {
+                        minimize: true,
+                        sourceMap: true
+                    }
+                }
+            ]
+        },
+
+        {
+            test: /\.json$/,
+            loader: 'json-loader'
+        },
+        {
+            test: /\.html$/,
+            include: /node_modules/,
+            use: [{
+                loader: 'html-loader',
+                options: {
+                    minimize: true
+                }
+            }]
+        },
+        {
+            test: /\.(svg|woff|woff2|eot|ttf)$/,
+            use: 'file-loader?outputPath=fonts/',
+        }
+    ]
+}
+
 };
 

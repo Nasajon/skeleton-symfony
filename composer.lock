@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "937d20271426895004931cd7beb8a992",
+    "content-hash": "b75f5dc1ee68eb151cf2719f081c011d",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -4551,11 +4551,11 @@
         },
         {
             "name": "nasajon/mdatransformer",
-            "version": "v2.3.1",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "git@github.com:Nasajon/MdaPhpTransformer",
-                "reference": "01b6111923c37af8267de3b8454a85368718fcb2"
+                "reference": "d60990d50dab06732d49d39fbf979c68020730c5"
             },
             "require": {
                 "doctrine/orm": ">2.5",
@@ -4587,7 +4587,7 @@
                     "email": "rodrigodirk@nasajon.com.br"
                 }
             ],
-            "time": "2019-01-03T14:03:51+00:00"
+            "time": "2019-04-22T17:54:28+00:00"
         },
         {
             "name": "phar-io/manifest",
@@ -6154,6 +6154,7 @@
     "stability-flags": {
         "nasajon/sdk": 20,
         "nasajon/login-bundle": 20,
+        "nasajon/mdatransformer": 20,
         "nasajon/bancosweb": 20
     },
     "prefer-stable": false,

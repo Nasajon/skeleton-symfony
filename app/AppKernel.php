@@ -21,7 +21,6 @@ class AppKernel extends Kernel {
             new Nasajon\LoginBundle\NasajonLoginBundle(),
             new Nasajon\MDABundle\NasajonMDABundle(),
             new Symfony\Bundle\TwigBundle\TwigBundle(),
-            new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('prod'), true)) {
@@ -32,6 +31,7 @@ class AppKernel extends Kernel {
 
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
+            $bundles[] = new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle();
         }
 
         return $bundles;

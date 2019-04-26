@@ -21,3 +21,11 @@ monolog:
 web_profiler:		
     toolbar: true		
     intercept_redirects: false
+
+
+doctrine_migrations:
+    dir_name: "%kernel.project_dir%/database"
+    namespace: DoctrineMigrations
+    table_name: migration_versions
+    name: Application Migrations
+    organize_migrations: false

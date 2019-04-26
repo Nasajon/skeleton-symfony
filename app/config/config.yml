@@ -101,19 +101,13 @@ light_saml_symfony_bridge:
         entity_id: "%env(entity_id)%"
         credentials:
             -
-                certificate: "%kernel.project_dir%/%env(sp_certificate_crt)%"
-                key:         "%kernel.project_dir%/%env(sp_certificate_pem)%"
+                certificate: "%env(sp_certificate_crt)%"
+                key:         "%env(sp_certificate_pem)%"
                 password:    ~
     party:
         idp:
             files:
-                - "%kernel.project_dir%/%env(sp_metadata)%"
+                - "%env(sp_metadata)%"
     store:
         id_state: id_store  # name of id store service created in step 6
 
-doctrine_migrations:
-    dir_name: "%kernel.project_dir%/database"
-    namespace: DoctrineMigrations
-    table_name: migration_versions
-    name: Application Migrations
-    organize_migrations: false

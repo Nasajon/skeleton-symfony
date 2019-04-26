@@ -26,13 +26,13 @@
         "nasajon/login-bundle": "dev-master",
         "sentry/sentry-symfony": "^2.0",
         "nasajon/componentes-interface-bundle": "dev-master",
-        "lightsaml/sp-bundle": "^1.1",
-        "doctrine/doctrine-migrations-bundle": "^1.3"
+        "lightsaml/sp-bundle": "^1.1"
     },
     "require-dev": {
         "sensio/distribution-bundle": "^5.0.19",
         "nasajon/mdatransformer": "dev-master",
-        "codeception/codeception": "^2.3.7"
+        "codeception/codeception": "^2.3.7",
+        "doctrine/doctrine-migrations-bundle": "^1.3"
     },
     "config": {
         "platform": {

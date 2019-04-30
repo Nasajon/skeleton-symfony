@@ -12,3 +12,8 @@ pessoas:
     type: rest
     resource: "Nasajon\\MDABundle\\Controller\\PessoasController"
     name_prefix:   "pessoas_"
+
+pessoascontatos:
+    type: rest
+    resource: "Nasajon\\MDABundle\\Controller\\PessoascontatosController"
+    name_prefix:   "pessoascontatos_"

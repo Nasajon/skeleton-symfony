@@ -10,16 +10,19 @@
         <fieldmodel name="updated_at" datatype="datetime" column="updated_at" />
         <fieldmodel name="updated_by" datatype="json" column="updated_by" />
     </entity>
+    <constructors>
+        <constructoritem required="true">tenant</constructoritem>
+    </constructors>
     <viewbrowser label="Cidades" layout="list" paginate="true" target="builtin">
-     <filters>
-        <fieldsfilters>
-            <fieldfilter entitylink="estado" >
-                 <conditions>
-                     <condition type="eq"/>
-                 </conditions>
-            </fieldfilter>
-        </fieldsfilters>  
-    </filters>
+        <filters>
+            <fieldsfilters>
+                <fieldfilter entitylink="estado">
+                    <conditions>
+                        <condition type="eq"/>
+                    </conditions>
+                </fieldfilter>
+            </fieldsfilters>
+        </filters>
         <fieldsbrowser>
             <fieldbrowser entitylink="cidade" isid="true" visible="false"/>
             <fieldbrowser entitylink="nome" visible="true" cansearch="true" />
@@ -30,8 +33,8 @@
         <form name="default" label="Cidades">
             <layout>
                 <headerform>
-                    <row>                        
-                        <cell name="estado" controltype="lookup" fieldaliaslookup="estado" label="Estado" colspan="2" entitylink="estado" fielddetaillookup="sigla">
+                    <row>
+                        <cell name="estado" controltype="lookup"  label="Estado" colspan="2" entitylink="estado" fielddetaillookup="sigla">
                             <validates>
                                 <validate type="vnull" displaytext="O campo Estado não pode ser vazio."/>
                             </validates>

@@ -4555,7 +4555,7 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:Nasajon/MdaPhpTransformer",
-                "reference": "d60990d50dab06732d49d39fbf979c68020730c5"
+                "reference": "131c23ea6a4a9600b4db49b6533fcf699424b68a"
             },
             "require": {
                 "doctrine/orm": ">2.5",
@@ -4587,7 +4587,7 @@
                     "email": "rodrigodirk@nasajon.com.br"
                 }
             ],
-            "time": "2019-04-22T17:54:28+00:00"
+            "time": "2019-04-25T11:46:01+00:00"
         },
         {
             "name": "phar-io/manifest",

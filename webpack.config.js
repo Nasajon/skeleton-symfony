@@ -132,7 +132,16 @@ module.exports = {
             './src/Nasajon/MDABundle/Resources/js/Pessoas/show.js',
             './src/Nasajon/MDABundle/Resources/js/Pessoas/index.js',
             './src/Nasajon/MDABundle/Resources/js/Pessoas/edit.js',
-            './src/Nasajon/MDABundle/Resources/js/Pessoas/factory.js'
+            './src/Nasajon/MDABundle/Resources/js/Pessoas/factory.js',
+
+            './src/Nasajon/MDABundle/Resources/js/Pessoascontatos/config.js',
+            './src/Nasajon/MDABundle/Resources/js/Pessoascontatos/default.form.js',
+            './src/Nasajon/MDABundle/Resources/js/Pessoascontatos/default.form.show.js',
+            './src/Nasajon/MDABundle/Resources/js/Pessoascontatos/new.js',
+            './src/Nasajon/MDABundle/Resources/js/Pessoascontatos/show.js',
+            './src/Nasajon/MDABundle/Resources/js/Pessoascontatos/index.js',
+            './src/Nasajon/MDABundle/Resources/js/Pessoascontatos/edit.js',
+            './src/Nasajon/MDABundle/Resources/js/Pessoascontatos/factory.js'
 
         ],
         app: [

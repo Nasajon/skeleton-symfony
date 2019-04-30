@@ -10,10 +10,13 @@
         <fieldmodel name="updated_at" datatype="datetime" column="updated_at" />
         <fieldmodel name="updated_by" datatype="json" column="updated_by" />
     </entity>
-    <viewbrowser label="Estados" layout="list" paginate="true" target="builtin">    
+    <constructors>
+        <constructoritem required="true">tenant</constructoritem>
+    </constructors>
+    <viewbrowser label="Estados" layout="list" paginate="true" target="builtin">
         <fieldsbrowser>
-            <fieldbrowser entitylink="estado" isid="true" visible="false"  />
-            <fieldbrowser entitylink="sigla" visible="true" cansearch="true"  />
+            <fieldbrowser entitylink="estado" isid="true" visible="false" />
+            <fieldbrowser entitylink="sigla" visible="true" cansearch="true" />
             <fieldbrowser entitylink="nome" visible="true" cansearch="true"/>
         </fieldsbrowser>
     </viewbrowser>
@@ -59,7 +62,7 @@
                 <name>EstadoAlterar</name>
                 <fromto valueapi="estado" valueentity="estado"/>
                 <fromto valueapi="nome" valueentity="nome"/>
-                <fromto valueapi="sigla" valueentity="sigla"/>              
+                <fromto valueapi="sigla" valueentity="sigla"/>
                 <fromto valueapi="tenant" valueentity ="tenant" />
                 <fromto valueapi="updated_by" valueentity ="logged_user"/>
             </api>

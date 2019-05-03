@@ -21,7 +21,8 @@ angular.module('main',
             'ui.mask',
             'ngCpfCnpj',
             'dateInput',
-            'nasajon-ui'
+            'nasajon-ui',
+            'innerForm'
 
         ])
         .config(['$locationProvider', '$urlRouterProvider', function ($locationProvider, $urlRouterProvider) {

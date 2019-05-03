@@ -5,6 +5,7 @@
         <fieldmodel name="nome" datatype="string" column="nome"/>
         <fieldmodel name="cpf" datatype="string" column="cpf"/>
         <fieldmodel name="identidade" datatype="string" column="identidade"/>
+        <fieldmodel name="endereco" datatype="string" column="endereco"/>
         <fieldmodel name="estado" datatype="integer" column="estado" useCaseLink="estados" entityJoinType="left"/>
         <fieldmodel name="cidade" datatype="integer" column="cidade" useCaseLink="cidades" entityJoinType="left"/>
         <fieldmodel name="tenant" datatype="integer" column="tenant" />
@@ -12,7 +13,7 @@
         <fieldmodel name="created_by" datatype="json" column="created_by" />
         <fieldmodel name="updated_at" datatype="datetime" column="updated_at" />
         <fieldmodel name="updated_by" datatype="json" column="updated_by" />
-        <!-- <fieldmodel name="pessoascontatos" datatype="objectlist" column="pessoa" useCaseLink="pessoascontatos" entityJoinType="left" /> -->
+        <fieldmodel name="pessoascontatos" datatype="objectlist" column="pessoa" useCaseLink="pessoascontatos" entityJoinType="left" />
     </entity>
     <constructors>
         <constructoritem required="true">tenant</constructoritem>
@@ -42,6 +43,11 @@
                         </cell>
                     </row>
                     <row>
+                        <cell name="endereco" controltype="textedit" label="Endereco" colspan="7" entitylink="endereco">
+                            <validates>
+                                <validate type="vnull" displaytext="O campo Endereço não pode ser vazio."/>
+                            </validates>
+                        </cell>    
                         <cell name="estado" controltype="lookup" entitylink="estado" colspan="2" fielddetaillookup="sigla">
                             <validates>
                                 <validate type="vnull" displaytext="O campo Estado não pode ser vazio."/>
@@ -54,11 +60,11 @@
                             <filter field="estado" condition="eq" entitylink="estado"/>
                         </cell>
                     </row>
-                    <!-- <row>
+                    <row>
                         <cell name="pessoascontatos" controltype="objectlist" entitylink="pessoascontatos" colspan="12" label="Contatos">
                          
                         </cell>
-                    </row> -->
+                    </row>
                 </headerform>
             </layout>
         </form>
@@ -74,10 +80,12 @@
                 <fromto valueapi="nome" valueentity="nome"/>
                 <fromto valueapi="cpf" valueentity="cpf"/>
                 <fromto valueapi="identidade" valueentity="identidade"/>
+                <fromto valueapi="endereco" valueentity="endereco"/>
                 <fromto valueapi="estado" valueentity="estado"/>
                 <fromto valueapi="cidade" valueentity="cidade"/>
                 <fromto valueapi="tenant" valueentity ="tenant" />
                 <fromto valueapi="created_by" valueentity ="logged_user"/>
+                <fromto valueapi="pessoascontatos" valueentity ="pessoascontatos" />
             </api>
         </action>
         <action>
@@ -88,10 +96,12 @@
                 <fromto valueapi="nome" valueentity="nome"/>
                 <fromto valueapi="cpf" valueentity="cpf"/>
                 <fromto valueapi="identidade" valueentity="identidade"/>
+                <fromto valueapi="endereco" valueentity="endereco"/>
                 <fromto valueapi="estado" valueentity="estado"/>
                 <fromto valueapi="cidade" valueentity="cidade"/>
                 <fromto valueapi="tenant" valueentity ="tenant" />
                 <fromto valueapi="updated_by" valueentity ="logged_user"/>
+                <fromto valueapi="pessoascontatos" valueentity ="pessoascontatos" />
             </api>
         </action>
         <action>

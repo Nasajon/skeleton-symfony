@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<nsjusecase xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../vendor/nasajon/mdatransformer/schemas/nsjusecase.xsd" name="pessoas" label="pessoas">
+<nsjusecase xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../vendor/nasajon/mdatransformer/schemas/nsjusecase.xsd" name="pessoascontatos" label="pessoascontatos">
     <entity schema="treinamentos" table="pessoascontatos">
         <fieldmodel name="pessoacontato" datatype="guid" isid="true" column="pessoacontato"/>
         <fieldmodel name="nome" datatype="string" column="nome"/>
-        <fieldmodel name="tipo" datatype="string" column="tipo"/>
+        <fieldmodel name="tipo" datatype="string" column="tipo">
+            <options type="json">{"Res":"Residencial", "Cel":"Celular", "Com":"Comercial"}</options>
+        </fieldmodel>
         <fieldmodel name="telefone" datatype="string" column="telefone"/>        
         <fieldmodel name="pessoa" datatype="guid" column="pessoa" useCaseLink="pessoas" entityJoinType="left"/>
         <fieldmodel name="tenant" datatype="integer" column="tenant" />
@@ -17,7 +19,7 @@
     <viewbrowser label="Contatos" layout="list" paginate="true" target="builtin">
         <fieldsbrowser>
             <fieldbrowser entitylink="pessoacontato" isid="true" visible="false"/>
-            <fieldbrowser entitylink="pessoa" visible="true" cansearch="true" />
+            <fieldbrowser entitylink="pessoa" visible="true" cansearch="true" fielddetaillookup='nome'/>
             <fieldbrowser entitylink="nome" visible="true" cansearch="true" />
             <fieldbrowser entitylink="tipo" visible="true" cansearch="true" />
             <fieldbrowser entitylink="telefone" visible="true" cansearch="true" />
@@ -33,7 +35,7 @@
                                 <validate type="vnull" displaytext="O campo Nome não pode ser vazio."/>
                             </validates>
                         </cell>
-                        <cell name="tipo" controltype="textedit" label="Tipo" colspan="3" entitylink="tipo">
+                        <cell name="tipo" controltype="combobox" label="Tipo" colspan="3" entitylink="tipo">
                             <validates>
                                 <validate type="vnull" displaytext="O campo Tipo não pode ser vazio."/>
                             </validates>

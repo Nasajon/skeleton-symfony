@@ -30,9 +30,9 @@
     },
     "require-dev": {
         "sensio/distribution-bundle": "^5.0.19",
-        "nasajon/mdatransformer": "dev-master",
+        "nasajon/mdatransformer": "^2.4",
         "codeception/codeception": "^2.3.7",
-        "nasajon/bancosweb": "dev-master"
+        "nasajon/bancosweb": "dev-welcome-to-nasajon-mda"
     },
     "config": {
         "platform": {

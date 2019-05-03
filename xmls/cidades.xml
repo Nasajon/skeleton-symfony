@@ -16,7 +16,7 @@
     <viewbrowser label="Cidades" layout="list" paginate="true" target="builtin">
         <filters>
             <fieldsfilters>
-                <fieldfilter entitylink="estado">
+                <fieldfilter visible="false" entitylink="estado">
                     <conditions>
                         <condition type="eq"/>
                     </conditions>

@@ -29,4 +29,4 @@ services:
 
     session.handler.memcached:
         class: Symfony\Component\HttpFoundation\Session\Storage\Handler\MemcachedSessionHandler
-        arguments: [ '@session.memcached', { prefix: 'ponto_session_', expiretime: 86400 } ]
+        arguments: [ '@session.memcached', { prefix: 'symfony_skeleton_sess_', expiretime: 86400 } ]

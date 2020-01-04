@@ -19,10 +19,10 @@
     <viewbrowser label="Contatos" layout="list" paginate="true" target="builtin">
         <fieldsbrowser>
             <fieldbrowser entitylink="pessoacontato" isid="true" visible="false"/>
-            <fieldbrowser entitylink="pessoa" visible="true" cansearch="true" fielddetaillookup='nome'/>
-            <fieldbrowser entitylink="nome" visible="true" cansearch="true" />
-            <fieldbrowser entitylink="tipo" visible="true" cansearch="true" />
-            <fieldbrowser entitylink="telefone" visible="true" cansearch="true" />
+            <fieldbrowser entitylink="pessoa" visible="false" cansearch="true" fielddetaillookup='nome'/>
+            <fieldbrowser alias="Contato" entitylink="nome" visible="true" cansearch="true" />
+            <fieldbrowser alias="Tipo" entitylink="tipo" visible="true" cansearch="true" />
+            <fieldbrowser alias="Telefone" entitylink="telefone" visible="true" cansearch="true" />
         </fieldsbrowser>
     </viewbrowser>
     <forms>

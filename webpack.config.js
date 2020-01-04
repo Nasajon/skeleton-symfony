@@ -4,6 +4,7 @@ var path = require('path');
 const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const glob = require('glob');
 const devMode = process.env.NODE_ENV !== 'production'
 
 
@@ -15,15 +16,15 @@ function getPlugins() {
             }
         }),
         new MiniCssExtractPlugin({
-            filename: devMode ? '[name].css' : '[name].[hash].css',            
+            filename: devMode ? '[name].css' : '[name].[hash:6].min.css',            
         }),
         new HtmlWebpackPlugin({
             filename: path.resolve(__dirname, 'src/Nasajon/MDABundle/Resources/js/index.html'),
             template: path.resolve(__dirname, 'src/Nasajon/MDABundle/Resources/js/index.html')
         }),
-        new webpack.SourceMapDevToolPlugin({
-            filename: "sourcemap/[file].map"
-        }),
+        // new webpack.SourceMapDevToolPlugin({
+        //     filename: "sourcemap/[file].map"
+        // }),
         new LoaderOptionsPlugin({
             debug: true,
             options: {
@@ -46,121 +47,111 @@ function getEnvironment () {
 
 module.exports = {
 
-    mode: getEnvironment(),
+    mode: process.env.NODE_ENV,
 
     resolve: {
-        extensions: ['.ts', '.js']
+        extensions: ['.ts', '.js'],
+        cacheWithContext: false,
+        symlinks: false
     },
 
     optimization: {
-        nodeEnv: process.env.NODE_ENV,
-        minimizer: devMode ? [ new TerserPlugin({}) ] : [] 
+        removeAvailableModules: false,
+        removeEmptyChunks: false,
+        splitChunks: false,
+        minimizer: [new TerserPlugin({})]
     },
 
     entry: {
         vendor: [
-          './node_modules/angular/angular.js',
-          './node_modules/@uirouter/angularjs/release/angular-ui-router.js',
-          './node_modules/angular-messages/angular-messages.min.js',
-          './node_modules/angular-locale-pt-br/angular-locale_pt-br.js',
-          './node_modules/angular-animate/angular-animate.min.js',
-          './node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js',
-          './node_modules/angular-sanitize/angular-sanitize.min.js',
-          './node_modules/angular-moment/angular-moment.min.js',
-          './node_modules/angularjs-toaster/toaster.min.js',
-          './node_modules/ng-infinite-scroll/build/ng-infinite-scroll.min.js',
-          './node_modules/ui-select/dist/select.min.js',
-          './node_modules/moment/min/moment.min.js',
-          './node_modules/moment-timezone/builds/moment-timezone-with-data-2010-2020.min.js',
-          './node_modules/moment/locale/pt-br.js',
-          './node_modules/ng-file-upload/dist/ng-file-upload.min.js',
-          './node_modules/angular-file-input/dist/angular-file-input.min.js',
-          './node_modules/angular-tree-dnd/dist/ng-tree-dnd.min.js',
-          './node_modules/angular-ui-mask/dist/mask.min.js',
-          './node_modules/angular-filter/dist/angular-filter.js',
-          './node_modules/cpf_cnpj/build/cpf.js',
-          './node_modules/cpf_cnpj/build/cnpj.js',
-          './node_modules/checklist-model/checklist-model.js',
-          './node_modules/nasajon-ui/src/nasajon-ui.ts',
-          './node_modules/@fortawesome/fontawesome-free/js/all.js',
-        ],
-        css: [
-            './assets/sass/style.scss',
-            './node_modules/ui-select/dist/select.css',
-            './node_modules/angular-tree-dnd/dist/ng-tree-dnd.css',
-            './node_modules/@fortawesome/fontawesome-free/css/all.css',
-        ],
-        lib: [
+
+            //Recursos do AngularJS
+            './node_modules/@uirouter/angularjs/release/angular-ui-router.min.js',
+            './node_modules/angular-messages/angular-messages.min.js',
+            './node_modules/angular-animate/angular-animate.min.js',
+            './node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js',
+            './node_modules/angular-sanitize/angular-sanitize.min.js',
+            './node_modules/angular-moment/angular-moment.min.js',
+            './node_modules/angularjs-toaster/toaster.min.js',
+            './node_modules/angular-file-input/dist/angular-file-input.min.js',
+            './node_modules/angular-ui-mask/dist/mask.min.js',
+            './node_modules/angular-filter/dist/angular-filter.min.js',
+            './node_modules/angular-locale-pt-br/angular-locale_pt-br.js',
+
+            //Recursos dependentes do AngularJS
+            './node_modules/ui-select/dist/select.min.js',
+            './node_modules/moment/min/moment.min.js',
+            './node_modules/moment/locale/pt-br.js',
+            './node_modules/moment-timezone/builds/moment-timezone-with-data-2010-2020.min.js',
+            './node_modules/multiple-date-picker/dist/multipleDatePicker.min.js',
+          
+            //Symfony
             './vendor/friendsofsymfony/jsrouting-bundle/Resources/public/js/router.js',
-            './node_modules/nasajon-ui/src/utils/nsj/globals/globals.min.js',
-            './node_modules/nasajon-ui/src/utils/nsj-routing.js',
-            './node_modules/nasajon-ui/src/forms/js/convert_to_number.js',
-            './node_modules/nasajon-ui/src/forms/js/date_input.js',
-            './node_modules/nasajon-ui/src/forms/js/filters.js',
-            './node_modules/nasajon-ui/src/utils/is_state_filter.js',
-            './node_modules/nasajon-ui/src/forms/select/mdauiselect.js',
-            './node_modules/nasajon-ui/src/utils/debounce.js',
-            './node_modules/nasajon-ui/src/tables/objectlist.js',
-            './node_modules/nasajon-ui/src/forms/js/ui_mask_filter.js',
-            './node_modules/nasajon-ui/src/forms/js/cpf_cnpj.js'
-        ],
-        mda: [
-            './assets/js/mda-config.js',
 
-            './src/Nasajon/MDABundle/Resources/js/Estados/config.js',
-            './src/Nasajon/MDABundle/Resources/js/Estados/default.form.js',
-            './src/Nasajon/MDABundle/Resources/js/Estados/default.form.show.js',
-            './src/Nasajon/MDABundle/Resources/js/Estados/new.js',
-            './src/Nasajon/MDABundle/Resources/js/Estados/show.js',
-            './src/Nasajon/MDABundle/Resources/js/Estados/index.js',
-            './src/Nasajon/MDABundle/Resources/js/Estados/edit.js',
-            './src/Nasajon/MDABundle/Resources/js/Estados/factory.js',
+            //Nasajon-ui
+            './node_modules/nasajon-ui/lib/nasajon-ui.ts',
 
-            './src/Nasajon/MDABundle/Resources/js/Cidades/config.js',
-            './src/Nasajon/MDABundle/Resources/js/Cidades/default.form.js',
-            './src/Nasajon/MDABundle/Resources/js/Cidades/default.form.show.js',
-            './src/Nasajon/MDABundle/Resources/js/Cidades/new.js',
-            './src/Nasajon/MDABundle/Resources/js/Cidades/show.js',
-            './src/Nasajon/MDABundle/Resources/js/Cidades/index.js',
-            './src/Nasajon/MDABundle/Resources/js/Cidades/edit.js',
-            './src/Nasajon/MDABundle/Resources/js/Cidades/factory.js',
-
-            './src/Nasajon/MDABundle/Resources/js/Pessoas/config.js',
-            './src/Nasajon/MDABundle/Resources/js/Pessoas/default.form.js',
-            './src/Nasajon/MDABundle/Resources/js/Pessoas/default.form.show.js',
-            './src/Nasajon/MDABundle/Resources/js/Pessoas/new.js',
-            './src/Nasajon/MDABundle/Resources/js/Pessoas/show.js',
-            './src/Nasajon/MDABundle/Resources/js/Pessoas/index.js',
-            './src/Nasajon/MDABundle/Resources/js/Pessoas/edit.js',
-            './src/Nasajon/MDABundle/Resources/js/Pessoas/factory.js',
-
-            './src/Nasajon/MDABundle/Resources/js/Pessoascontatos/config.js',
-            './src/Nasajon/MDABundle/Resources/js/Pessoascontatos/default.form.js',
-            './src/Nasajon/MDABundle/Resources/js/Pessoascontatos/default.form.show.js',
-            './src/Nasajon/MDABundle/Resources/js/Pessoascontatos/new.js',
-            './src/Nasajon/MDABundle/Resources/js/Pessoascontatos/show.js',
-            './src/Nasajon/MDABundle/Resources/js/Pessoascontatos/index.js',
-            './src/Nasajon/MDABundle/Resources/js/Pessoascontatos/edit.js',
-            './src/Nasajon/MDABundle/Resources/js/Pessoascontatos/factory.js'
+            //Compatibilidade Nasajon-ui
+            './node_modules/nasajon-ui/nasajon-ui-old/utils/nsj/globals/globals.min.js',
+            './node_modules/nasajon-ui/nasajon-ui-old/utils/nsj-routing.js',
+            './node_modules/nasajon-ui/nasajon-ui-old/utils/is_state_filter.js',
+            './node_modules/nasajon-ui/nasajon-ui-old/utils/debounce.js',
+            './node_modules/nasajon-ui/nasajon-ui-old/forms/select/mdauiselect.js',
+            './node_modules/nasajon-ui/nasajon-ui-old/tables/objectlist.js',
+            './node_modules/nasajon-ui/nasajon-ui-old/forms/js/convert_to_number.js',
+            './node_modules/nasajon-ui/nasajon-ui-old/forms/js/date_input.js',
+            './node_modules/nasajon-ui/nasajon-ui-old/forms/js/filters.js',
+            './node_modules/nasajon-ui/nasajon-ui-old/forms/js/ui_mask_filter.js',
+            './node_modules/nasajon-ui/nasajon-ui-old/forms/js/cpf_cnpj.js',
+            
+            './assets/js/app.module.ts',
 
         ],
-        app: [
-            './assets/js/app.js'
-        ]
+        styles: [
+            './assets/sass/style.scss',
+            './node_modules/@fortawesome/fontawesome-free/css/all.css',
+            './node_modules/multiple-date-picker/dist/multipleDatePicker.css',
+        ],
+
+        mda: glob.sync("./src/Nasajon/MDABundle/Resources/js/**/*.ts", {
+            ignore: [ ]
+        }),
+
+        //custom: glob.sync("./assets/js/custom/**/*.ts"),
     },
-    output: {
-        filename: getEnvironment() === 'production' ? '[name]-[hash:6].min.js' : '[name].js',
+
+   output: {
+
+        filename: devMode ? '[name].js' : '[name]-[hash:6].min.js',
         path: path.resolve(__dirname, './web/assets'),
         publicPath: '/assets/'
     },
+
 plugins: getPlugins(),
 
 module: {
-    rules: [{
+    rules: [
+
+        {
+            include: [
+                path.resolve(__dirname, 'assets/js'),
+                path.resolve(__dirname, 'src/Nasajon/MDABundle/Resources/js'),
+                path.resolve(__dirname, 'node_modules/nasajon-ui')
+            ],
+
             test: /\.ts$/,
             use: [
-                'awesome-typescript-loader'
-            ]
+                {
+                    loader: 'ts-loader',
+                    options: {
+                        transpileOnly: true,
+                        experimentalWatchApi: true,
+                        happyPackMode: true
+                    },
+                },
+            ],
+
+
         },
         {
             test: /\.(sa|sc|c)ss$/,
@@ -188,11 +179,6 @@ module: {
                 }
             ]
         },
-
-        {
-            test: /\.json$/,
-            loader: 'json-loader'
-        },
         {
             test: /\.html$/,
             include: /node_modules/,
@@ -202,6 +188,22 @@ module: {
                     minimize: true
                 }
             }]
+        },
+        {
+            test: /\.json$/,
+            loader: 'json-loader'
+        },
+        {
+            test: /\.(jpg|png)$/,
+            include: [
+                path.resolve(__dirname, 'assets/img')
+            ],
+            use: {
+                loader: "url-loader",
+                options: {
+                    name: 'img/[name].[ext]'
+                },
+            },
         },
         {
             test: /\.(svg|woff|woff2|eot|ttf)$/,

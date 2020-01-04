@@ -2,7 +2,8 @@ transformer:
     source: "xmls"
     target: "src/Nasajon/MDABundle"
     plugins:
-        - angular1
+        - angular1:
+            useTypeScript: true
         - symfony
 compiler:
     namespace:

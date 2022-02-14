@@ -2,33 +2,43 @@ version: '2'
 
 services:
     app:
-        image: nasajon/php:7.1-fpm-symfony-dev
+        image: arquiteturansj/php:7.4-fpm-symfony5-dev
         restart: always
         ports:
-            - "80:80"
+            - "8000:80"
         volumes:
-            - $PWD:/var/www/html        
+            - $PWD:/var/www/html
+            - $PWD/nginx:/etc/nginx/conf.d
         env_file:
-            - common.env
+            - .env.dev
 
-    php-node:
-        image: nasajon/php-node
+    mda4:
+        image: arquiteturansj/mda4
+        volumes:
+              - ./:/home
+        environment:
+              - "PYTHONPATH=/home/vendor/nasajon/mda4/src"
+              - "XSD_ROOT=/home/vendor/nasajon/mda4/schema"
+        working_dir: /home
+        entrypoint: python /home/vendor/nasajon/mda4/src/erp4/mda4.py
+
+    transformer:
+        image: php:7.4-fpm
         volumes:
               - ./:/var/www/html
         environment:
               - "NODE_ENV=development"
         working_dir: /var/www/html
         entrypoint: php vendor/nasajon/mdatransformer/bin/transformer nasajon:mda:builder --nocache -vvv --cleardir
-        
 
     postgres:
-       image: postgres:10.6
+       image: postgres:9.5
        ports:
          - "5432:5432"
        restart: always
        volumes:
-           - $PWD/vendor/nasajon/bancosweb/dump:/docker-entrypoint-initdb.d/
+           - $PWD/../ErpApiWeb/vendor/nasajon/bancosweb/dump:/docker-entrypoint-initdb.d/
        environment:
            - "POSTGRES_DB=integratto2"
-           - "POSTGRES_USER=bancosweb"
-           - "POSTGRES_PASSWORD=mysecretpassword"   
+           - "POSTGRES_USER=postgres"
+           - "POSTGRES_PASSWORD=postgres"

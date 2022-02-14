@@ -1,0 +1,3 @@
+app: cadastrogeral
+app_version: v1
+ssm_name: cadastrogeral

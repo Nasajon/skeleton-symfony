@@ -1,43 +1,54 @@
-.PHONY: config_common composer_install yarn_install start db_migrate
+.PHONY: run final_test config_common composer_install transformer tests database generate_migration migrate clean down start_application end_alert bash run_no_test
+
+run:	config_common composer_install transformer migrate start_application end_alert
+
+run_no_test: config_common composer_install transformer migrate start_application end_alert
+
+final_test: clean run tests
 
 config_common:
-	cp common.env.dist common.env
+	cp .env .env.dev
 
 composer_install:
 	composer install --ignore-platform-reqs --no-scripts
 
-yarn_install:
-	yarn install
+mda4:
+	docker-compose run --rm  mda4
 
-start:
-	docker-compose up -d
+transformer:
+	docker-compose run --rm  transformer
 
-check_db_up: 
-	@for i in `seq 1 5`; do \
-		if (docker-compose exec postgres sh -c 'psql -U bancosweb -d integratto2 -c "select 1;"' 2>&1 > /dev/null) then break; \
-		else echo "postgres initializing..."; sleep 5; fi \
-	done
+build:
+	docker-compose run --rm  mda4
+	docker-compose run --rm  transformer
 
-db_migrate:
-	make check_db_up
-	@while true; do \
-		if (docker-compose exec postgres bash -c 'psql -qAt -U bancosweb -d integratto2	 -c "SELECT count(*) FROM pg_stat_activity where state IS NOT NULL" > /tmp/count && if grep -q "1" /tmp/count ;then true; else false; fi') then break; \
-		else echo "postgres initial script still running..."; sleep 5; fi \
-	done
-	docker-compose exec app app/console doctrine:migration:migrate --no-interaction
+tests:
+	docker-compose exec app vendor/bin/codecept run functional $(test) --fail-fast
 
-permission:
-	sudo chmod -R 777 var/cache
-	sudo chmod -R 777 var/logs
+generate_migration:
+	docker-compose exec app php bin/console doctrine:migration:generate
 
-transform:
-	docker-compose run --rm php-node
+migrate:	database
+	docker-compose up -d app
+	docker-compose exec postgres sh -c 'while ! pg_isready -U $POSTGRES_USER -h postgres; do echo "postgres initial script still running..."; sleep 5; done'
+	docker-compose exec app php bin/console --no-interaction doctrine:migrations:migrate
 
-run:
-	make config_common
-	make composer_install
-	make yarn_install
-	make start
-	make db_migrate
-	make permission
-	make transform
+database: 
+	docker-compose up -d postgres
+
+clean:
+	docker-compose down
+	sudo rm -rf vendor/
+	sudo rm -rf mda/Nasajon/MDABundle
+
+down:
+	docker-compose down
+
+start_application:
+	docker-compose up -d app
+
+end_alert:
+	notify-send 'Api' 'Aplicação Iniciada'
+
+bash:
+	docker-compose run --rm app sh

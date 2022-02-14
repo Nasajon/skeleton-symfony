@@ -1,0 +1,69 @@
+node('aws-codebuild') {
+
+   stage('Fetch') {
+        timeout(time: 60, unit: 'SECONDS') {
+            checkout scm
+        }
+    }
+    def PLAYBOOK = "/opt/devops/Ansible/ci.yml"
+    
+    stage('Environment Config') {
+        sh "auto_config"
+    }	
+
+    stage('Config'){
+        sh 'cp .env .env.dev'
+    }
+	
+    	
+    docker.image("arquiteturansj/composer:2.1.14").inside("-v /root/.ssh:/root/.ssh") {
+        stage('Composer-dev'){
+            sh 'composer install --prefer-dist --optimize-autoloader --no-scripts --ignore-platform-reqs'
+        }
+    }
+	
+	
+
+
+    stage('MDA4') {
+    docker.image('arquiteturansj/mda4').inside("-v /root/.ssh:/root/.ssh -e NODE_ENV=production -e SYMFONY_DEPRECATIONS_HELPER=disabled -e PYTHONPATH=vendor/nasajon/mda4/src -e XSD_ROOT=vendor/nasajon/mda4/schema") {
+	    sh 'python vendor/nasajon/mda4/src/erp4/mda4.py'
+	}
+    docker.image('php:7.4-fpm').inside("-v /root/.ssh:/root/.ssh -e NODE_ENV=production -e SYMFONY_DEPRECATIONS_HELPER=disabled") {
+		sh 'php vendor/nasajon/mdatransformer/bin/transformer nasajon:mda:builder --nocache'
+        }
+
+    }
+
+
+    stage('Tests') {
+		
+    }
+
+   stage('Composer'){
+        docker.image("arquiteturansj/composer:2.1.14").inside("-v /root/.ssh:/root/.ssh") {
+            sh 'composer install --prefer-dist --optimize-autoloader --no-scripts --no-dev --ignore-platform-reqs'
+        }
+    }
+
+  if (env.BRANCH_NAME == 'development') {
+        stage('Deploy Dev'){
+            sh "ansible-playbook ${PLAYBOOK} -e 'build_path=${WORKSPACE} env=dev'"
+        }
+    }
+    else if (env.BRANCH_NAME == 'master') {
+        stage('Deploy QA'){
+            sh "ansible-playbook ${PLAYBOOK} -e 'build_path=${WORKSPACE} env=qa'"
+        }
+    }
+    else if (env.BRANCH_NAME == 'production') {
+        stage('Pipeline Prod'){
+            sh "ansible-playbook ${PLAYBOOK} -e 'build_path=${WORKSPACE} env=prod'"
+        }
+    }
+    else {
+        stage('Build Docker Image'){
+            sh "ansible-playbook ${PLAYBOOK} -e 'build_path=${WORKSPACE} env=test'"
+        }
+    }
+}

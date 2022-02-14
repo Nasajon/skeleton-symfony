@@ -1,4 +1,0 @@
-tenants:
-    controller: "Nasajon\\MDABundle\\Controller\\TenantsController::createAction"
-    path: "/tenants/"
-    methods: [POST]

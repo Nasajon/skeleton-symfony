@@ -1,0 +1,32 @@
+monolog:
+    handlers:
+        main:
+            type:         fingers_crossed
+            action_level: error
+            handler:      nested
+        nested:
+            type:  stream
+            path:  '%kernel.logs_dir%/%kernel.environment%-debug.log'
+            level: debug
+            channels: ["!event"]
+        console:
+            type: console
+            level: info
+            process_psr_3_messages: false
+            channels: ['!doctrine', '!console', '!event']
+        filter_error:
+            type: fingers_crossed
+            action_level: error
+            handler: nested_error
+        nested_error:
+            type: stream
+            path: "%kernel.logs_dir%/%kernel.environment%-error.log"
+            level: error
+        filter_info:
+            type: fingers_crossed
+            action_level: info
+            handler: nested_info
+        nested_info:
+            type: stream
+            path: "%kernel.logs_dir%/%kernel.environment%-info.log"
+            level: info

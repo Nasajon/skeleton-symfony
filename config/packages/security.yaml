@@ -1,0 +1,47 @@
+security:
+    enable_authenticator_manager: true
+    access_decision_manager:
+        strategy: unanimous
+        allow_if_all_abstain:  true  
+
+    providers:
+        nasajon_provider:
+            id: Nasajon\LoginBundle\Provider\SamlProvider
+
+    firewalls:
+        healthcheck:
+            pattern: ^/healthcheck$
+            security: false
+
+        profiler:
+            pattern: ^/_profiler
+            security: false
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        api:
+            pattern:   ^/
+            stateless: true
+            provider: nasajon_provider
+            custom_authenticators:
+                authenticator: Nasajon\LoginBundle\Security\Authentication\BearerTokenAuthenticator
+
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+    access_control:
+        - { path: ^/, methods: [OPTIONS],  roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/,       roles: ROLE_USER }
+
+when@test:
+    security:
+        password_hashers:
+            # By default, password hashers are resource intensive and take time. This is
+            # important to generate secure password hashes. In tests however, secure hashes
+            # are not important, waste resources and increase test times. The following
+            # reduces the work factor to the lowest possible values.
+            Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface:
+                algorithm: auto
+                cost: 4 # Lowest possible value for bcrypt
+                time_cost: 3 # Lowest possible value for argon
+                memory_cost: 10 # Lowest possible value for argon

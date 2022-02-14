@@ -1,0 +1,29 @@
+# Read the documentation: https://symfony.com/doc/master/bundles/FOSRestBundle/index.html
+fos_rest:
+    disable_csrf_role: ROLE_API
+    param_fetcher_listener: true
+    routing_loader: false
+    view:
+        mime_types:
+            json: ['application/json', 'application/json;version=1.0', 'application/json;version=1.1']
+        view_response_listener: 
+            force: true
+        formats:            
+            json: true
+            xml:  true
+            html: true
+    format_listener:
+        rules:       
+            - { path: ^/, priorities: [ json ], fallback_format: json, prefer_extension: true }
+    body_converter:
+        enabled: true
+        validate: true
+    exception:
+        enabled: true        
+        codes:
+            'Symfony\Component\Routing\Exception\ResourceNotFoundException': 404
+            'Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException': 405
+            # 'Doctrine\ORM\OptimisticLockException': HTTP_CONFLICT
+        messages:
+            'Symfony\Component\Routing\Exception\ResourceNotFoundException': true
+    allowed_methods_listener: true    

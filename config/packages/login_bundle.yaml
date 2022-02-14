@@ -1,0 +1,12 @@
+nasajon_login:
+    pg_semprovisao: redirect_nasajon
+    permission_format: tenant
+    permission_type: grupo_v3
+    keycloak:
+        realm: '%env(keycloak_realm)%'
+        client_id: '%env(keycloak_client_id)%'
+        server_url: '%env(keycloak_url)%'
+    diretorio_sistema_id: '%env(diretorio_sistema_id)%'
+    cache:
+        keycloak: 'cache.keycloak'
+        profile: 'cache.profile'

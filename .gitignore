@@ -1,17 +1,15 @@
-/web/bundles/
-/web/assets/
-/app/cache/*
-/app/logs/*
-/build/
+
+###> symfony/framework-bundle ###
+/.env.dev
+/.env.local
+/.env.local.php
+/.env.*.local
+/config/secrets/prod/prod.decrypt.private.php
+/public/bundles/
+/var/
 /vendor/
-/bin/
-/composer.phar
-app/config/parameters.yml
-.idea
-.idea/*
-/nbproject/*
-/node_modules/*
-/src/Nasajon/MDABundle
-/common.env
-/var/cache/*
-/var/logs/*
+###< symfony/framework-bundle ###
+
+/mda/
+
+/xmls/
